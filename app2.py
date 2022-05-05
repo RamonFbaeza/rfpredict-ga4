@@ -53,7 +53,7 @@ def index():
 def metrics():
     if request.method == 'POST':
         file = request.form['upload-file']
-        data = pd.read_csv(file, sep=';')
+        data = pd.read_csv(file, sep=',')
 
         data = data.loc[(data.sum(axis=1) != 0), (data.sum(axis=0) != 0)] # Elimiamnos variales que siempre están a 0
         metrics_list = list(data.values) 
@@ -72,14 +72,14 @@ def metrics():
         first_visits = data['first_visit'].sum()
         first_visits_per = (first_visits/sessions)* 100
         first_visits_per = round(first_visits_per, 1) 
-        thank_you = data['add_to_cart'].sum()
+        thank_you = data['click'].sum()
         page_views = data['page_view'].sum()
             
 
-        target = 'add_to_cart'
+        target = 'click'
 
         # discretizamos la variable objetivo
-        data['buyer'] = [1 if x > 0 else 0 for x in data['add_to_cart'].values]
+        data['buyer'] = [1 if x > 0 else 0 for x in data['click'].values]
 
         buyers = data['buyer'].sum()
 
@@ -88,7 +88,7 @@ def metrics():
 
         features = list(data.columns)
 
-        features.remove('add_to_cart')
+        features.remove('click')
         features.remove('buyer')
         #features.remove('thank_you')
         #features.remove('user_pseudo_id')
@@ -143,7 +143,7 @@ def transform_view():
     print("HELLOOOOOOO")
     print("DATA:",data)
     
-    data = data.drop('add_to_cart', 1)
+    data = data.drop('click', 1)
    # data = data.drop('buyer', 1)
 
     # load the model from disk
