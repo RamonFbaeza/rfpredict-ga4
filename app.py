@@ -1,3 +1,4 @@
+from app.main import app
 import csv
 from json import load
 import os
