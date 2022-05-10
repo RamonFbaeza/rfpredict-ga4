@@ -1,1 +1,2 @@
-web: gunicorn app.wsgi:app
+from whitenoise.django import DjangoWhiteNoise
+application = DjangoWhiteNoise(application)
