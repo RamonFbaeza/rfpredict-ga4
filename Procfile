@@ -1,1 +1,1 @@
-web: gunicorn rf-predict.wsgi
+web: gunicorn myproject.wsgi
