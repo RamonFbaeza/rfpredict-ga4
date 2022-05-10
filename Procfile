@@ -1,1 +1,1 @@
-    web: gunicorn mysite.wsgi --log-file -
+web: gunicorn --pythonpath rf-predict rf-predict.wsgi
