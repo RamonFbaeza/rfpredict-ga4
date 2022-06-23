@@ -14,7 +14,6 @@ import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVR
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import matplotlib.pylab as plt
@@ -36,9 +35,6 @@ df.to_csv('data.csv', index=None)
   
 
 
-@app.route('/index.html', methods=['GET', 'POST'])
-def index2():
-    return render_template('index.html')
 
 
 
@@ -53,7 +49,7 @@ def index():
 def metrics():
     if request.method == 'POST':
         file = request.form['upload-file']
-        data = pd.read_csv(file, sep=',')
+        data = pd.read_csv(file, sep=';')
 
         data = data.loc[(data.sum(axis=1) != 0), (data.sum(axis=0) != 0)] # Elimiamnos variales que siempre están a 0
         metrics_list = list(data.values) 
