@@ -3,73 +3,174 @@
 
 <head>
 
+
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Ramón Fernández">
+    <meta name="generator" content="Ramón Fernández">
+    <title>RF PREDICT</title>
 
-    <title>RF ANALYTICS</title>
+  
+  
+  
 
-    <!-- Custom fonts for this template-->
-    <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
 
 </head>
 
-<body class="bg-gradient-primary">
+<main>
 
 
-    <body class="bg-gradient-primary">
+  
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"></svg>
+        <img class="d-block mx-auto mb-4" src="{{url_for('static', filename='logo-300px.png')}}" alt="" width="150" height="63">
+      </a>
 
-        <div class="container">
-            <div class="row">
-              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="card border-0 shadow rounded-3 my-5">
-                  <div class="card-body p-4 p-sm-5">
-                    <h5 class="card-title text-center mb-5 fw-light fs-5">RAMONFBAEZA</h5>
-                    <form class="" action="metrics" method="post">
-                        <label for="formFile" class="form-label">Sube tu archivo de Google Analytics 4 </label>
-                        <input class="form-control" type="file"  name="upload-file" >
-                        <hr>
-                        <input type="submit" name="upload-file" class = "btn btn-primary btn-user btn-block"  id="formFile" value="Submit" >
-
-                        <hr>
-                        <p>O si lo prefieres...</p>
-                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                          <i class="fab fa-google fa-fw"></i> Conéctate a Big Query
-                      </a>
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Subir archivo</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Entrenamiento</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Realizar predicción</a></li>
+      </ul>
+    </header>
+  </div>
 
 
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="px-4 py-5 my-5 text-center">
+    
+    <div class="container col-xxl-8 px-4">
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-5" >
+        <div class="col-10 col-sm-8 col-lg-6">
+          <img src="{{url_for('static', filename='query-ga4.png')}}" class="d-block mx-lg-auto img-fluid" width="700" height="500" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold lh-1 mb-3" style="text-align: left;">RF PREDICT</h1>
+          <p class="lead" style="text-align: left;">Realiza <strong>predicciones sobre tu set de datos de GA4 en BigQuery</strong>. Para obtener esta tabla, deberás ejecutar el siguiente código en tu proyecto de BigQuery asociado a tu flujo de datos de GA4.</p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="container col-xxl-8 px-4">
+  
+      <pre style="background-color: #f7f7f9;"><code> 
+         
+        # Copia y page este código en BigQuery, indicando tu código de proyecto de GA4.
+
+        select
+            *
+          from (
+            select
+                user_pseudo_id,
+                event_name
+            from
+                  `ramonfbaeza-ga4.analytics_245414605.events_202201*`)
+          pivot (
+            count(*)
+            for
+                event_name
+            in (
+                'session_start',
+                'first_visit',
+                'page_view',
+                'scroll',
+                'click',
+                'view_search_results',
+                'file_download',
+                'video_start'))
+
+
+      </code></pre>
+    </div>
+  </div>
 
 
 
 
 
+  <div class="container col-xxl-8 px-4 py-5"></div>
+    <div class="px-4 py-5  text-center">
+      <h1 class="display-5 fw-bold">SUBE TU ARCHIVO</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Sube tu archivo de BQ de Google Analytics 4 en formato CSV para realizar el entrenamiento</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <form class="" action="metrics" method="post" style="display: inherit;">
+            <input class="form-control" type="file"  name="upload-file" >
+            <input type="submit" name="upload-file" class = "btn btn-primary btn-user btn-block"  id="formFile" value="Subir archivo" >
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container col-xxl-8 px-4 py-5"></div>
+
+  
+  
+</main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
     
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-</body>
+  </body>
 
 </html>

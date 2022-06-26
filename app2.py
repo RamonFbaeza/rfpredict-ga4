@@ -18,7 +18,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pylab as plt
 from google.cloud import bigquery
-from flask import Flask, make_response,render_template,  request,session, send_file, send_from_directory, current_app
+from flask import Flask, make_response,render_template,  request,session, send_file, send_from_directory, current_app, url_for
 import io
 from io import StringIO
 pd.set_option('display.max_columns', None)
@@ -34,19 +34,21 @@ df = pd.read_csv('data.csv')
 df.to_csv('data.csv', index=None)
   
 
-
+print("df:",df)
 
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    img_url = "https://ramonfbaeza.com/wp-content/uploads/2022/03/logo-300x127-1.png"
+    img_url = "/bootstrap/assets/images/query-ga4.png"
+    print("HELLOOOOOOO")
     return render_template('index.html',img_url=img_url)
 
 
 
 @app.route('/metrics', methods=['GET', 'POST'])
 def metrics():
+    print("HELLOOOOOOO22222")
     if request.method == 'POST':
         file = request.form['upload-file']
         data = pd.read_csv(file, sep=';')
