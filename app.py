@@ -1,4 +1,3 @@
-from app.main import app
 import csv
 from json import load
 import os
@@ -15,7 +14,6 @@ import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVR
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import matplotlib.pylab as plt
@@ -26,40 +24,42 @@ from io import StringIO
 pd.set_option('display.max_columns', None)
 
 
+
   
   
 app = Flask(__name__)
-  
+
+
+
+
   
 # reading the data in the csv file
-df = pd.read_csv('data.csv')
-df.to_csv('data.csv', index=None)
+# df = pd.read_csv('data.csv')
+# df.to_csv('data.csv', index=None)
   
 
-
-@app.route('/index.html', methods=['GET', 'POST'])
-def index2():
-    return render_template('index.html')
+# print("df:",df)
 
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    img_url = "https://ramonfbaeza.com/wp-content/uploads/2022/03/logo-300x127-1.png"
+    img_url = "/bootstrap/assets/images/query-ga4.png"
+    print("HELLOOOOOOO")
     return render_template('index.html',img_url=img_url)
 
 
 
 @app.route('/metrics', methods=['GET', 'POST'])
 def metrics():
+    print("HELLOOOOOOO22222")
     if request.method == 'POST':
         file = request.form['upload-file']
+        
         data = pd.read_csv(file, sep=',')
 
-        data = data.loc[(data.sum(axis=1) != 0), (data.sum(axis=0) != 0)] # Elimiamnos variales que siempre están a 0
+        #data = data.loc[(data.sum(axis=1) != 0), (data.sum(axis=0) != 0)] # Elimiamnos variales que siempre están a 0
         metrics_list = list(data.values) 
-        #events_list = list(data.values)
-
 
         columns = data.columns
         columns_list = list(columns)
@@ -73,14 +73,14 @@ def metrics():
         first_visits = data['first_visit'].sum()
         first_visits_per = (first_visits/sessions)* 100
         first_visits_per = round(first_visits_per, 1) 
-        thank_you = data['click'].sum()
+        thank_you = data['video_start'].sum()
         page_views = data['page_view'].sum()
             
 
-        target = 'click'
+        target = 'video_start'
 
         # discretizamos la variable objetivo
-        data['buyer'] = [1 if x > 0 else 0 for x in data['click'].values]
+        data['buyer'] = [1 if x > 0 else 0 for x in data['video_start'].values]
 
         buyers = data['buyer'].sum()
 
@@ -89,12 +89,12 @@ def metrics():
 
         features = list(data.columns)
 
-        features.remove('click')
+        features.remove('video_start')
         features.remove('buyer')
-        #features.remove('thank_you')
-        #features.remove('user_pseudo_id')
+
 
         print('features ', features)
+        print('TARGET ', target)
 
         ## CÓDIGO PARA PREDECIR EL MODELO
         x = data[features]
@@ -127,30 +127,29 @@ def metrics():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     return render_template('predict.html')
-    
 
 
 
-@app.route('/transform',  methods=['GET', 'POST'])
+
+
+@app.route('/predicted',  methods=['GET', 'POST'])
 def transform_view():
     f = request.form['upload-file']
-    data = pd.read_csv(f, sep=';')
+    data = pd.read_csv(f, sep=',')
 
     print(f)
     if not f:
         return "No file"
     
     
-    print("HELLOOOOOOO")
-    print("DATA:",data)
-    
-    data = data.drop('click', 1)
+   # data = data.drop('video_start', 1)
    # data = data.drop('buyer', 1)
 
     # load the model from disk
     loaded_model = pickle.load(open('model_pickle', 'rb'))
+
     data['prediction'] = loaded_model.predict(data)
-    print("ADDIOOOOOOOSS")
+    
     
     columns = data.columns
     print("columns: ", columns)
@@ -167,7 +166,7 @@ def transform_view():
             print(row[i])
                                                                 
                         
-            return render_template('table.html',data=data,titles=[''],columns_list=columns_list,metrics_list=metrics_list,columns=columns)
+            return render_template('predicted.html',data=data,titles=[''],columns_list=columns_list,metrics_list=metrics_list,columns=columns)
 
  
 

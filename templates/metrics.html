@@ -144,8 +144,6 @@
 
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Subir archivo</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Entrenamiento</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Realizar predicción</a></li>
       </ul>
     </header>
   </div>
@@ -204,6 +202,39 @@
       </div>
 
     </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#bootstrap"></use></svg>
+        <div>
+          <h4 class="fw-bold mb-0">Variable objetivo</h4>
+          <p>{{ target }}</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#cpu-fill"></use></svg>
+        <div>
+          <h4 class="fw-bold mb-0">Precisión del modelo</h4>
+          <p>{{ result }}</p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3"></use></svg>
+        <div>
+          <h4 class="fw-bold mb-0"></h4>
+          <p></p>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#home"></use></svg>
+        <div>
+          <h4 class="fw-bold mb-0"></h4>
+          <p></p>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 
 
@@ -212,19 +243,29 @@
   <div class="container px-4 py-5" id="icon-grid">
     <h2 class="pb-2 border-bottom">Eventos analizados en el dataset</h2>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
-
         <p>
-
             {% for row in features %}
                 {{row}} <br>
-        
             {% endfor %}
-
-
         </p>
+    </div>
+  </div>
 
 
-
+  <div class="container col-xxl-8 px-4 py-5"></div>
+    <div class="px-4 py-5  text-center">
+      <h1 class="display-5 fw-bold">¡SUBE TU ARCHIVO!</h1>
+      <br>
+      <div class="alert alert-primary" role="alert" style="display: inline-block;">
+        Sube tu archivo de GA4 en formato csv y obtendrás las predicciones para cada uno de tus user_pseudo_id
+      </div>
+      <br>
+      <form class="" action="/predicted" method="post" style="display: inline-table;">
+        <input class="form-control" type="file"  name="upload-file" >
+        <hr>
+        <input type="submit" name="upload-file" class = "btn btn-primary btn-user btn-block"  id="formFile" value="Subir archivo" >
+      </form>
+      <br>
       
     </div>
   </div>
