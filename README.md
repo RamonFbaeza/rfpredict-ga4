@@ -1,4 +1,4 @@
-# RF Predict GA4
+# RF Predict Google Analytics 4
 
 RF predict GA4 is a project built with Python using Flask. The main functionality of this project is to estimate if an user will make a purchase based on their previous behaviour.
 
