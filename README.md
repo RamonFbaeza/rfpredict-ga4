@@ -1,3 +1,5 @@
+
+![RamónFbaeza Logo](https://ramonfbaeza.com/wp-content/uploads/2022/03/logo-400x400px-e1647431977872.png)
 # RF Predict Google Analytics 4
 
 RF predict GA4 is a project built with Python using Flask. The main functionality of this project is to estimate if an user will make a purchase based on their previous behaviour.
