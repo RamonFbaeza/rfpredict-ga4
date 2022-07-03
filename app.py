@@ -73,14 +73,14 @@ def metrics():
         first_visits = data['first_visit'].sum()
         first_visits_per = (first_visits/sessions)* 100
         first_visits_per = round(first_visits_per, 1) 
-        thank_you = data['video_start'].sum()
+        thank_you = data['purchase'].sum()
         page_views = data['page_view'].sum()
             
 
-        target = 'video_start'
+        target = 'purchase'
 
         # discretizamos la variable objetivo
-        data['buyer'] = [1 if x > 0 else 0 for x in data['video_start'].values]
+        data['buyer'] = [1 if x > 0 else 0 for x in data['purchase'].values]
 
         buyers = data['buyer'].sum()
 
@@ -89,7 +89,7 @@ def metrics():
 
         features = list(data.columns)
 
-        features.remove('video_start')
+        features.remove('purchase')
         features.remove('buyer')
 
 

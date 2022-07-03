@@ -113,15 +113,14 @@
       <pre style="background-color: #f7f7f9;"><code> 
          
         # Copia y page este código en BigQuery, indicando tu código de proyecto de GA4.
-
-        select
+          select
             *
           from (
             select
                 user_pseudo_id,
                 event_name
             from
-                  `ramonfbaeza-ga4.analytics_245414605.events_202201*`)
+                  `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_20210101`)
           pivot (
             count(*)
             for
@@ -134,7 +133,17 @@
                 'click',
                 'view_search_results',
                 'file_download',
-                'video_start'))
+                'user_engagement',
+                'view_item',
+                'view_promotion',
+                'add_to_cart',
+                'select_item',
+                'begin_checkout',
+                'view_search_results',
+                'add_shipping_info',
+                'select_promotion',
+                'add_payment_info',
+                'purchase',
 
 
       </code></pre>
