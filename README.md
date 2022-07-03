@@ -37,7 +37,35 @@ Now yoy can navigate to the following address: http://127.0.0.1:5000/ and you sh
 
 ### Step 3.  🔧
 
-Download your GA4 metrics from your BigQuery project (_if you have enabled BigQuery Export for your GA4 data stream_)
+Download your GA4 metrics from your BigQuery project (_if you have enabled BigQuery Export for your GA4 data stream_) using the following code but using your own project_id and your own events
+
+
+
+ ```
+        select
+            *
+          from (
+            select
+                user_pseudo_id,
+                event_name
+            from
+                  `ramonfbaeza-ga4.analytics_xxxxxxx.events_202201*`)
+          pivot (
+            count(*)
+            for
+                event_name
+            in (
+                'session_start',
+                'first_visit',
+                'page_view',
+                'scroll',
+                'click',
+                'view_search_results',
+                'file_download',
+                'video_start'))
+```
+
+        
 
 ### Step 4.  🔧
 
