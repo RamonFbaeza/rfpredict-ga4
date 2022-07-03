@@ -35,7 +35,18 @@ Now yoy can navigate to the following address: http://127.0.0.1:5000/ and you sh
 
 ![Main View](https://ramonfbaeza.com/wp-content/uploads/2022/07/rfpredict-ga4-1.png)
 
+### Step 3.  🔧
 
+Download your GA4 metrics from your BigQuery project (_if you have enabled BigQuery Export for your GA4 data stream_)
+
+### Step 4.  🔧
+
+Upload your file to the web app and
+
+![Main View](https://ramonfbaeza.com/wp-content/uploads/2022/07/rfpredict-ga4-2.png)
+
+
+Then, **you will get your model trainned and you will see the model score**. You will also be able to upload a new file to predict conversion probability for each client (user_pseudo_id). **You will be able to download an excel/csv** file with all the predictions.
 
 
 ## Built with 🛠️
