@@ -33,7 +33,7 @@ python3 app.py
 ```
 Now yoy can navigate to the following address: http://127.0.0.1:5000/ and you should see the web app running.
 
-![Main View](../../../Desktop/rfpredict-ga4-1.png)
+![Main View](https://ramonfbaeza.com/wp-content/uploads/2022/07/rfpredict-ga4-1.png)
 
 
 
