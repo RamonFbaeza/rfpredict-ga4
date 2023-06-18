@@ -1,7 +1,11 @@
+# pip install scikit-learn
+# pip install plotly
+
+
+
 import csv
 from json import load
 import os
-import load
 from sklearn.pipeline import make_pipeline
 import plotly.express as px
 import plotly.graph_objects as go
@@ -16,8 +20,8 @@ from sklearn.svm import SVR
 import pandas as pd
 import numpy as np
 import seaborn as sns
-import matplotlib.pylab as plt
-from google.cloud import bigquery
+import matplotlib.pyplot as plt
+
 from flask import Flask, make_response,render_template,  request,session, send_file, send_from_directory, current_app, url_for
 import io
 from io import StringIO
